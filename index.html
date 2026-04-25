@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lyric Studio "Double K"</title>
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         /* Sembunyikan scrollbar untuk tampilan yang lebih bersih, opsional */
@@ -34,8 +32,7 @@
 <body class="min-h-screen bg-slate-950 text-slate-200 p-4 md:p-8 font-sans">
     <div class="max-w-6xl mx-auto">
         
-        <!-- Header -->
-        <header class="mb-8 border-b border-slate-800 pb-6 flex items-center justify-between">
+        <header class="mb-8 border-b border-slate-800 pb-6 flex items-start md:items-center justify-between flex-col md:flex-row gap-4">
             <div>
                 <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent flex items-center gap-3">
                     <i data-lucide="mic-2" class="w-8 h-8 text-indigo-400"></i>
@@ -45,11 +42,14 @@
                     Asisten Komposer Cerdas Anda. Buat lagu hits berikutnya! bersama Studio Double K (Khansa & Khalid)
                 </p>
             </div>
+            
+            <button onclick="setApiKey()" class="text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl border border-slate-700 flex items-center gap-2 transition-all">
+                <i data-lucide="key" class="w-4 h-4"></i> Set API Key
+            </button>
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             
-            <!-- Left Panel: Controls -->
             <div class="lg:col-span-4 space-y-6">
                 <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl">
                     <h2 class="text-xl font-semibold mb-5 flex items-center gap-2 text-white">
@@ -57,7 +57,6 @@
                         Briefing Lagu
                     </h2>
 
-                    <!-- Theme Input -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-slate-400 mb-2">
                             Ide Cerita / Topik
@@ -67,7 +66,6 @@
                             class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all min-h-[100px] resize-none"></textarea>
                     </div>
 
-                    <!-- Genre Select -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-slate-400 mb-2 flex items-center gap-2">
                             <i data-lucide="disc" class="w-4 h-4"></i> Genre Musik
@@ -85,7 +83,6 @@
                         </select>
                     </div>
 
-                    <!-- Target Audience Select -->
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-slate-400 mb-2 flex items-center gap-2">
                             <i data-lucide="user" class="w-4 h-4"></i> Target Pendengar
@@ -99,7 +96,6 @@
                         </select>
                     </div>
 
-                    <!-- Mood Select -->
                     <div class="mb-6">
                         <label class="block text-sm font-medium text-slate-400 mb-2 flex items-center gap-2">
                             <i data-lucide="music" class="w-4 h-4"></i> Vibe / Mood
@@ -115,7 +111,6 @@
                         </select>
                     </div>
 
-                    <!-- Generate Button -->
                     <button id="generate-btn" class="w-full py-3 px-4 rounded-xl font-medium flex items-center justify-center transition-all bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/20">
                         <span id="gen-idle" class="flex items-center gap-2">
                             <i data-lucide="sparkles" class="w-5 h-5"></i>
@@ -127,12 +122,10 @@
                         </span>
                     </button>
 
-                    <!-- Error Message -->
                     <div id="error-box" class="mt-4 p-3 bg-red-900/30 border border-red-800/50 rounded-lg text-red-400 text-sm hidden">
                     </div>
                 </div>
 
-                <!-- Composer Tip Card -->
                 <div class="bg-indigo-950/30 border border-indigo-900/50 p-5 rounded-2xl flex items-start gap-3">
                     <i data-lucide="info" class="w-5 h-5 text-indigo-400 flex-shrink-0 mt-0.5"></i>
                     <div>
@@ -144,11 +137,9 @@
                 </div>
             </div>
 
-            <!-- Right Panel: Output Workspace -->
             <div class="lg:col-span-8">
                 <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl h-full flex flex-col overflow-hidden min-h-[600px]">
                     
-                    <!-- Workspace Header -->
                     <div class="bg-slate-800/50 p-4 border-b border-slate-800 flex items-center justify-between">
                         <div class="flex items-center gap-2">
                             <i data-lucide="file-text" class="w-5 h-5 text-slate-400"></i>
@@ -166,16 +157,13 @@
                         </div>
                     </div>
 
-                    <!-- Rich Text Editable Area -->
                     <div class="flex-grow p-0 relative">
-                        <!-- Empty State -->
                         <div id="empty-state" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500 p-8 text-center pointer-events-none">
                             <i data-lucide="music" class="w-16 h-16 mb-4 opacity-20"></i>
                             <p class="text-lg font-medium text-slate-400 mb-1">Kanvas Kosong</p>
                             <p class="text-sm max-w-md mx-auto">Isi briefing lagu di panel kiri dan tekan "Generate Lirik" untuk memulai sesi penulisan lagu Anda.</p>
                         </div>
                         
-                        <!-- The Editor -->
                         <div id="editor"
                             contenteditable="true"
                             spellcheck="false"
@@ -183,7 +171,6 @@
                             style="min-height: 500px;"></div>
                     </div>
                     
-                    <!-- StatusBar -->
                     <div id="status-bar" class="bg-slate-800/30 p-3 border-t border-slate-800 text-xs text-slate-500 flex justify-between hidden">
                         <span>Anda dapat mengedit dan memformat teks di atas secara langsung.</span>
                         <span id="word-count">~ 0 kata</span>
@@ -194,13 +181,25 @@
         </div>
     </div>
 
-    <!-- Application Logic -->
     <script>
         // Inisialisasi ikon Lucide
         lucide.createIcons();
 
-        // Konfigurasi API
-        const apiKey = ""; // API Key akan disediakan otomatis oleh environment saat eksekusi
+        // Konfigurasi API yang Diperbarui menggunakan LocalStorage
+        let apiKey = localStorage.getItem('gemini_api_key') || "";
+
+        // Fungsi untuk mengatur API Key melalui antarmuka
+        const setApiKey = () => {
+            const key = prompt("Masukkan API Key Gemini Anda (dapatkan di aistudio.google.com):", apiKey);
+            if (key !== null) {
+                apiKey = key.trim();
+                localStorage.setItem('gemini_api_key', apiKey);
+                if(apiKey) {
+                    alert("API Key berhasil disimpan di browser Anda!");
+                    errorBox.classList.add('hidden');
+                }
+            }
+        };
 
         // DOM Elements
         const themeInput = document.getElementById('theme');
@@ -258,7 +257,10 @@
                         }
                     );
 
-                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(errorData.error?.message || `HTTP error! status: ${response.status}`);
+                    }
                     
                     const data = await response.json();
                     return data.candidates[0].content.parts[0].text;
@@ -328,6 +330,16 @@
 
         // Fungsi Utama Generate Lirik
         const handleGenerate = async () => {
+            // Pengecekan API Key sebelum memulai proses
+            if (!apiKey) {
+                setApiKey();
+                if (!apiKey) {
+                    errorBox.innerText = 'API Key wajib diisi untuk menghasilkan lirik. Silakan klik tombol "Set API Key".';
+                    errorBox.classList.remove('hidden');
+                    return;
+                }
+            }
+
             const theme = themeInput.value;
             const genre = genreSelect.value;
             const audience = audienceSelect.value;
@@ -378,10 +390,16 @@
                 enableActionButtons();
                 
             } catch (err) {
-                errorBox.innerText = 'Maaf, studio sedang mengalami gangguan koneksi. Gagal menghasilkan lirik. Silakan coba lagi.';
+                errorBox.innerText = 'Gagal menghasilkan lirik. Pastikan API Key Anda valid dan kuota mencukupi. (Pesan Error: ' + err.message + ')';
                 errorBox.classList.remove('hidden');
                 if(editor.innerHTML.trim() === '') {
                     emptyState.classList.remove('hidden');
+                }
+                
+                // Hapus API Key yang salah jika server menolak akses
+                if (err.message.includes("400") || err.message.includes("403")) {
+                    localStorage.removeItem('gemini_api_key');
+                    apiKey = "";
                 }
             } finally {
                 // Restore UI from Loading State
@@ -402,9 +420,7 @@
         const handleCopy = () => {
             if (editor.innerText.trim() === '') return;
             
-            // Ekstrak innerText untuk menjaga spasi dan enter tetap rapi
             const textToCopy = editor.innerText;
-            
             const textArea = document.createElement("textarea");
             textArea.value = textToCopy;
             document.body.appendChild(textArea);
