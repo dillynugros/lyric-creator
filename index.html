@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lyric Studio "Double K"</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Sembunyikan scrollbar untuk tampilan yang lebih bersih, opsional */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569; 
+        }
+        [contenteditable]:empty:before {
+            content: attr(placeholder);
+            color: #64748b;
+            pointer-events: none;
+            display: block; /* Untuk Webkit */
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-950 text-slate-200 p-4 md:p-8 font-sans">
+    <div class="max-w-6xl mx-auto">
+        
+        <!-- Header -->
+        <header class="mb-8 border-b border-slate-800 pb-6 flex items-center justify-between">
+            <div>
+                <h1 class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent flex items-center gap-3">
+                    <i data-lucide="mic-2" class="w-8 h-8 text-indigo-400"></i>
+                    Lyric Studio "Double K"
+                </h1>
+                <p class="text-slate-400 mt-2 text-sm md:text-base">
+                    Asisten Komposer Cerdas Anda. Buat lagu hits berikutnya! bersama Studio Double K (Khansa & Khalid)
+                </p>
+            </div>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- Left Panel: Controls -->
+            <div class="lg:col-span-4 space-y-6">
+                <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 shadow-xl">
+                    <h2 class="text-xl font-semibold mb-5 flex items-center gap-2 text-white">
+                        <i data-lucide="pen-tool" class="w-5 h-5 text-purple-400"></i>
+                        Briefing Lagu
+                    </h2>
+
+                    <!-- Theme Input -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-slate-400 mb-2">
+                            Ide Cerita / Topik
+                        </label>
+                        <textarea id="theme"
+                            placeholder="Contoh: Perjuangan merantau di kota besar demi keluarga..."
+                            class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all min-h-[100px] resize-none"></textarea>
+                    </div>
+
+                    <!-- Genre Select -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-slate-400 mb-2 flex items-center gap-2">
+                            <i data-lucide="disc" class="w-4 h-4"></i> Genre Musik
+                        </label>
+                        <select id="genre" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all appearance-none">
+                            <option value="Pop">Pop</option>
+                            <option value="Rock">Rock</option>
+                            <option value="R&B / Soul">R&B / Soul</option>
+                            <option value="Hip Hop / Rap">Hip Hop / Rap</option>
+                            <option value="Dangdut">Dangdut</option>
+                            <option value="Folk / Indie">Folk / Indie</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="EDM / Dance">EDM / Dance</option>
+                            <option value="Lagu Anak">Lagu Anak</option>
+                        </select>
+                    </div>
+
+                    <!-- Target Audience Select -->
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-slate-400 mb-2 flex items-center gap-2">
+                            <i data-lucide="user" class="w-4 h-4"></i> Target Pendengar
+                        </label>
+                        <select id="audience" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all appearance-none">
+                            <option value="Anak-anak (Balita - SD)">Anak-anak (Balita - SD)</option>
+                            <option value="Remaja (Gen Z)" selected>Remaja (Gen Z)</option>
+                            <option value="Dewasa Muda (Millennials)">Dewasa Muda (Millennials)</option>
+                            <option value="Dewasa (Umum)">Dewasa (Umum)</option>
+                            <option value="Spesifik / Niche">Spesifik / Niche</option>
+                        </select>
+                    </div>
+
+                    <!-- Mood Select -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-slate-400 mb-2 flex items-center gap-2">
+                            <i data-lucide="music" class="w-4 h-4"></i> Vibe / Mood
+                        </label>
+                        <select id="mood" class="w-full bg-slate-950 border border-slate-700 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-500 transition-all appearance-none">
+                            <option value="Emosional / Galau" selected>Emosional / Galau</option>
+                            <option value="Semangat / Energik">Semangat / Energik</option>
+                            <option value="Romantis / Kasmaran">Romantis / Kasmaran</option>
+                            <option value="Marah / Pemberontak">Marah / Pemberontak</option>
+                            <option value="Santai / Chill">Santai / Chill</option>
+                            <option value="Inspiratif / Motivasi">Inspiratif / Motivasi</option>
+                            <option value="Ceria / Bahagia">Ceria / Bahagia</option>
+                        </select>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <button id="generate-btn" class="w-full py-3 px-4 rounded-xl font-medium flex items-center justify-center transition-all bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/20">
+                        <span id="gen-idle" class="flex items-center gap-2">
+                            <i data-lucide="sparkles" class="w-5 h-5"></i>
+                            Generate Lirik
+                        </span>
+                        <span id="gen-loading" class="flex items-center gap-2 hidden">
+                            <i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i>
+                            Menyusun Nada & Rima...
+                        </span>
+                    </button>
+
+                    <!-- Error Message -->
+                    <div id="error-box" class="mt-4 p-3 bg-red-900/30 border border-red-800/50 rounded-lg text-red-400 text-sm hidden">
+                    </div>
+                </div>
+
+                <!-- Composer Tip Card -->
+                <div class="bg-indigo-950/30 border border-indigo-900/50 p-5 rounded-2xl flex items-start gap-3">
+                    <i data-lucide="info" class="w-5 h-5 text-indigo-400 flex-shrink-0 mt-0.5"></i>
+                    <div>
+                        <h4 class="text-indigo-300 text-sm font-semibold mb-1">Tip Produser: <span id="tip-genre">Pop</span></h4>
+                        <p id="tip-desc" class="text-slate-400 text-xs leading-relaxed">
+                            Fokus pada "Hook" di Chorus. Pastikan melodi dan liriknya mudah diingat dalam 1-2 kali dengar.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Output Workspace -->
+            <div class="lg:col-span-8">
+                <div class="bg-slate-900 rounded-2xl border border-slate-800 shadow-xl h-full flex flex-col overflow-hidden min-h-[600px]">
+                    
+                    <!-- Workspace Header -->
+                    <div class="bg-slate-800/50 p-4 border-b border-slate-800 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-5 h-5 text-slate-400"></i>
+                            <h3 class="font-medium text-slate-200">Kertas Kerja (Editor)</h3>
+                        </div>
+                        
+                        <div class="flex items-center gap-2">
+                            <button id="copy-btn" disabled class="p-2 rounded-lg transition-all flex items-center gap-2 text-sm text-slate-600 cursor-not-allowed border border-transparent" title="Salin lirik">
+                                <span id="copy-idle" class="flex items-center gap-2"><i data-lucide="copy" class="w-4 h-4"></i> Salin</span>
+                                <span id="copy-success" class="flex items-center gap-2 hidden text-emerald-400"><i data-lucide="check" class="w-4 h-4"></i> Disalin</span>
+                            </button>
+                            <button id="refresh-btn" disabled class="p-2 rounded-lg transition-all text-slate-600 cursor-not-allowed border border-transparent" title="Generate ulang">
+                                <i id="refresh-icon" data-lucide="refresh-cw" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Rich Text Editable Area -->
+                    <div class="flex-grow p-0 relative">
+                        <!-- Empty State -->
+                        <div id="empty-state" class="absolute inset-0 flex flex-col items-center justify-center text-slate-500 p-8 text-center pointer-events-none">
+                            <i data-lucide="music" class="w-16 h-16 mb-4 opacity-20"></i>
+                            <p class="text-lg font-medium text-slate-400 mb-1">Kanvas Kosong</p>
+                            <p class="text-sm max-w-md mx-auto">Isi briefing lagu di panel kiri dan tekan "Generate Lirik" untuk memulai sesi penulisan lagu Anda.</p>
+                        </div>
+                        
+                        <!-- The Editor -->
+                        <div id="editor"
+                            contenteditable="true"
+                            spellcheck="false"
+                            class="w-full h-full min-h-[500px] bg-transparent text-slate-200 p-6 md:p-8 focus:outline-none focus:ring-0 font-mono text-sm leading-relaxed whitespace-pre-wrap outline-none"
+                            style="min-height: 500px;"></div>
+                    </div>
+                    
+                    <!-- StatusBar -->
+                    <div id="status-bar" class="bg-slate-800/30 p-3 border-t border-slate-800 text-xs text-slate-500 flex justify-between hidden">
+                        <span>Anda dapat mengedit dan memformat teks di atas secara langsung.</span>
+                        <span id="word-count">~ 0 kata</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Application Logic -->
+    <script>
+        // Inisialisasi ikon Lucide
+        lucide.createIcons();
+
+        // Konfigurasi API
+        const apiKey = ""; // API Key akan disediakan otomatis oleh environment saat eksekusi
+
+        // DOM Elements
+        const themeInput = document.getElementById('theme');
+        const genreSelect = document.getElementById('genre');
+        const audienceSelect = document.getElementById('audience');
+        const moodSelect = document.getElementById('mood');
+        
+        const generateBtn = document.getElementById('generate-btn');
+        const genIdle = document.getElementById('gen-idle');
+        const genLoading = document.getElementById('gen-loading');
+        
+        const copyBtn = document.getElementById('copy-btn');
+        const copyIdle = document.getElementById('copy-idle');
+        const copySuccess = document.getElementById('copy-success');
+        
+        const refreshBtn = document.getElementById('refresh-btn');
+        const refreshIcon = document.getElementById('refresh-icon');
+        
+        const errorBox = document.getElementById('error-box');
+        const editor = document.getElementById('editor');
+        const emptyState = document.getElementById('empty-state');
+        const statusBar = document.getElementById('status-bar');
+        const wordCountDisplay = document.getElementById('word-count');
+        
+        const tipGenre = document.getElementById('tip-genre');
+        const tipDesc = document.getElementById('tip-desc');
+
+        let isLoading = false;
+
+        // Fungsi delay
+        const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+        // Fungsi memanggil API
+        const fetchWithRetry = async (prompt, maxRetries = 5) => {
+            const delays = [1000, 2000, 4000, 8000, 16000];
+            
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(
+                        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`,
+                        {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                contents: [{ parts: [{ text: prompt }] }],
+                                systemInstruction: {
+                                    parts: [{
+                                        text: `Kamu adalah seorang komposer lagu, produser musik, dan penulis lirik profesional papan atas pemenang penghargaan. 
+                                        Tugasmu adalah menulis lirik lagu yang orisinal, berkarakter, memiliki rima yang kuat, dan siap untuk dinyanyikan.
+                                        Selalu berikan struktur lagu yang lengkap dan profesional (seperti [Intro], [Verse 1], [Pre-Chorus], [Chorus], [Verse 2], [Bridge], [Outro]).
+                                        Sisipkan juga panduan emosi atau aransemen vokal di dalam tanda kurung miring (misal: *nada meninggi*, *beat drop*, *vokal berbisik*).`
+                                    }]
+                                }
+                            })
+                        }
+                    );
+
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    
+                    const data = await response.json();
+                    return data.candidates[0].content.parts[0].text;
+                } catch (err) {
+                    if (i === maxRetries - 1) throw err;
+                    await sleep(delays[i]);
+                }
+            }
+        };
+
+        // Update Composer Tip saat Genre diganti
+        genreSelect.addEventListener('change', (e) => {
+            const genre = e.target.value;
+            tipGenre.innerText = genre;
+            
+            switch(genre) {
+                case 'Pop': tipDesc.innerText = 'Fokus pada "Hook" di Chorus. Pastikan melodi dan liriknya mudah diingat dalam 1-2 kali dengar.'; break;
+                case 'Rock': tipDesc.innerText = 'Gunakan kata-kata beroktan tinggi dan metafora yang kuat. Biarkan ada ruang untuk solo instrumen di bagian Bridge.'; break;
+                case 'Hip Hop / Rap': tipDesc.innerText = 'Perhatikan rima internal dan ritme suku kata (flow). Gunakan permainan kata (wordplay) yang cerdas.'; break;
+                case 'Lagu Anak': tipDesc.innerText = 'Gunakan repetisi (pengulangan) yang ceria. Jaga agar suku kata pendek-pendek dan pesannya mudah dicerna.'; break;
+                case 'Dangdut': tipDesc.innerText = 'Masukkan cengkok emosional. Tema keseharian, cinta rakyat, atau patah hati sangat cocok dengan beat kendang.'; break;
+                default: tipDesc.innerText = 'Struktur yang baik adalah kunci. Pastikan setiap Verse membangun cerita menuju klimaks di Chorus.';
+            }
+        });
+
+        // Menghitung jumlah kata
+        const updateWordCount = () => {
+            const text = editor.innerText.trim();
+            if (!text) {
+                wordCountDisplay.innerText = '~ 0 kata';
+                return;
+            }
+            const words = text.split(/\s+/).filter(word => word.length > 0).length;
+            wordCountDisplay.innerText = `~ ${words} kata`;
+        };
+
+        // Event saat pengguna mengetik di editor
+        editor.addEventListener('input', () => {
+            updateWordCount();
+            
+            // Tampilkan/Sembunyikan Empty State
+            if (editor.innerText.trim() === '') {
+                emptyState.classList.remove('hidden');
+                statusBar.classList.add('hidden');
+                disableActionButtons();
+            } else {
+                emptyState.classList.add('hidden');
+                statusBar.classList.remove('hidden');
+                enableActionButtons();
+            }
+        });
+
+        // Toggle Buttons State
+        const enableActionButtons = () => {
+            copyBtn.disabled = false;
+            copyBtn.className = "p-2 rounded-lg transition-all flex items-center gap-2 text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700";
+            refreshBtn.disabled = false;
+            refreshBtn.className = "p-2 rounded-lg transition-all bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700";
+        };
+
+        const disableActionButtons = () => {
+            copyBtn.disabled = true;
+            copyBtn.className = "p-2 rounded-lg transition-all flex items-center gap-2 text-sm text-slate-600 cursor-not-allowed border border-transparent";
+            refreshBtn.disabled = true;
+            refreshBtn.className = "p-2 rounded-lg transition-all text-slate-600 cursor-not-allowed border border-transparent";
+        };
+
+        // Fungsi Utama Generate Lirik
+        const handleGenerate = async () => {
+            const theme = themeInput.value;
+            const genre = genreSelect.value;
+            const audience = audienceSelect.value;
+            const mood = moodSelect.value;
+
+            if (!theme.trim()) {
+                errorBox.innerText = 'Mohon masukkan tema atau ide cerita lagu Anda.';
+                errorBox.classList.remove('hidden');
+                return;
+            }
+
+            // Set UI to Loading State
+            isLoading = true;
+            errorBox.classList.add('hidden');
+            emptyState.classList.add('hidden');
+            editor.classList.add('opacity-50');
+            editor.setAttribute('contenteditable', 'false');
+            
+            generateBtn.disabled = true;
+            generateBtn.className = "w-full py-3 px-4 rounded-xl font-medium flex items-center justify-center transition-all bg-slate-800 text-slate-500 cursor-not-allowed";
+            genIdle.classList.add('hidden');
+            genLoading.classList.remove('hidden');
+            
+            refreshIcon.classList.add('animate-spin');
+
+            const prompt = `Buatkan draf lirik lagu profesional berdasarkan spesifikasi berikut:
+            - Tema / Ide Cerita: ${theme}
+            - Genre Musik: ${genre}
+            - Target Pendengar: ${audience}
+            - Mood / Suasana: ${mood}
+
+            Instruksi Komposer:
+            1. Sesuaikan gaya bahasa dan tingkat kerumitan kosakata dengan Target Pendengar (misal: jika anak-anak gunakan kata sederhana dan repetitif, jika dewasa gunakan metafora yang lebih matang).
+            2. Pastikan rima dan ketukan (suku kata) terasa natural jika dinyanyikan dalam genre ${genre}.
+            3. Output harus dalam bahasa Indonesia yang baik, puitis, dan memiliki "hook" yang kuat di bagian Chorus.`;
+
+            try {
+                const generatedLyrics = await fetchWithRetry(prompt);
+                
+                // Format Markdown ke HTML Rich Text
+                const formattedLyrics = generatedLyrics
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+                editor.innerHTML = formattedLyrics;
+                updateWordCount();
+                statusBar.classList.remove('hidden');
+                enableActionButtons();
+                
+            } catch (err) {
+                errorBox.innerText = 'Maaf, studio sedang mengalami gangguan koneksi. Gagal menghasilkan lirik. Silakan coba lagi.';
+                errorBox.classList.remove('hidden');
+                if(editor.innerHTML.trim() === '') {
+                    emptyState.classList.remove('hidden');
+                }
+            } finally {
+                // Restore UI from Loading State
+                isLoading = false;
+                editor.classList.remove('opacity-50');
+                editor.setAttribute('contenteditable', 'true');
+                
+                generateBtn.disabled = false;
+                generateBtn.className = "w-full py-3 px-4 rounded-xl font-medium flex items-center justify-center transition-all bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-900/20";
+                genIdle.classList.remove('hidden');
+                genLoading.classList.add('hidden');
+                
+                refreshIcon.classList.remove('animate-spin');
+            }
+        };
+
+        // Fungsi Copy
+        const handleCopy = () => {
+            if (editor.innerText.trim() === '') return;
+            
+            // Ekstrak innerText untuk menjaga spasi dan enter tetap rapi
+            const textToCopy = editor.innerText;
+            
+            const textArea = document.createElement("textarea");
+            textArea.value = textToCopy;
+            document.body.appendChild(textArea);
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                
+                // Show success UI
+                copyIdle.classList.add('hidden');
+                copySuccess.classList.remove('hidden');
+                copyBtn.classList.add('bg-emerald-900/50', 'border-emerald-800/50');
+                copyBtn.classList.remove('bg-slate-800', 'border-slate-700', 'text-slate-300');
+                
+                setTimeout(() => {
+                    copyIdle.classList.remove('hidden');
+                    copySuccess.classList.add('hidden');
+                    copyBtn.classList.remove('bg-emerald-900/50', 'border-emerald-800/50');
+                    copyBtn.classList.add('bg-slate-800', 'border-slate-700', 'text-slate-300');
+                }, 2000);
+            } catch (err) {
+                console.error('Gagal menyalin teks', err);
+            }
+            
+            document.body.removeChild(textArea);
+        };
+
+        // Event Listeners
+        generateBtn.addEventListener('click', handleGenerate);
+        refreshBtn.addEventListener('click', () => {
+            if (!isLoading && themeInput.value.trim() !== '') {
+                handleGenerate();
+            }
+        });
+        copyBtn.addEventListener('click', handleCopy);
+
+    </script>
+</body>
+</html>
